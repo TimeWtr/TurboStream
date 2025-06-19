@@ -30,7 +30,6 @@ import (
 	"github.com/TimeWtr/TurboStream/core/component"
 	metrics2 "github.com/TimeWtr/TurboStream/core/metrics"
 	"github.com/TimeWtr/TurboStream/errorx"
-	"github.com/TimeWtr/TurboStream/pools"
 )
 
 const (
@@ -124,11 +123,11 @@ type DoubleBuffer struct {
 	// Waiters manager
 	wm *WaiterManager
 	// Life cycle manager
-	pm *pools.LifeCycleManager
+	pm *LifeCycleManager
 }
 
 func NewDoubleBuffer(size int32, sc *config.SwitchCondition, opts ...Options) (*DoubleBuffer, error) {
-	pm := pools.NewLifeCycleManager()
+	pm := NewLifeCycleManager()
 
 	d := &DoubleBuffer{
 		active:      component.NewSmartBuffer(size),
